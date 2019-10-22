@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let arrUser = [["thuhien"],["123456"]];
+    let login = function () {
+        let username=document.getElementById("user").value;
+        let password=document.getElementById("password").value;
+        if (username.trim() === '') {
+            alert("Please input username.");
+        } else if (password.trim() === '') {
+            alert("Please input password.");
+        } else {
+            for (let i = 0; i < arrUser[0].length; i++) {
+                if (username === arrUser[0][i] && password === arrUser[1][i]) {
+                    alert("Welcome " + arrUser[0][i] + " login success!");
+                    return window.location = "casestudy.html";
+                }
+            }
+            alert("Username or password is incorect.");
+        }
+    };
+</script>
+<form>
+    <h3>Please login</h3>
+    User:<input type="text" id="user">  Password:<input  type="password" id="password">
+    <input type="button" value="Login" onclick="login();">
+</form>
+
+<h3>
+    Click để xem thông tin sản phẩm của chúng tôi:
+</h3>
+<input type="button" id="login" value="Click" style="color: red" onclick="tkmk()">
+<h3 style="color: coral">
+    More products :
+</h3>
+<input id="add" type="text" size="50">
+<button onclick="add()">Add</button>
+<br>
+<h2>
+   the loai tieu thuyet :
+</h2>
+<img src="1.png" height="400" width="300"/>
+<img src="2.jpg" height="400" width="300"/>
+<img src="3.jpeg" height="400" width="300"/>
+<img src="4.jpeg" height="400" width="300"/>
+
+<table id ="productList">
+
+</table>
+<p id="abc"></p>
+<script>
+    let danhsach = ['dao tinh\n','hoa ra anh van o day\n','mai mai la bao xa\n','ben xe\n'];
+    function displayProducts(){
+        let table = "<table border='1' cellspacing='0' cellpadding='10'>";
+        for ( let i  = 0  ; i < danhsach.length ; i ++){
+            table += '<tr>';
+            table += '<td>'+ [i+1] + " "  ;
+            table += '<td>'+ danhsach[i] ;
+            table +=  '<td>' + '<button onclick="edit('+i+')"> Edit </button>';
+            table +=  '<td>' + '<button onclick="del('+i+')"> Delete </button>';
+            table +=  '<td>' + '<button onclick="buy('+i+')">Buy</button>';
+            table += '</tr>';
+        }
+        table += '</table>';
+        document.getElementById("productList").innerHTML = table;
+    }
+    displayProducts();
+    function add() {
+        let b = document.getElementById("add").value;
+        if (b.length== 0){
+            alert("Bạn chưa nhập")
+        }
+        else {
+            danhsach.push(b);
+            displayProducts();
+        }
+    }
+    function del(tom) {
+        danhsach.splice(tom,1);
+        displayProducts();
+    }
+    function edit(i) {
+        let newName = prompt("Nhập tên mới");
+        danhsach[i] = newName;
+        displayProducts();
+    }
+    function buy(i) {
+        if (confirm("Bạn đã xem kĩ thông tin sản phẩm của chúng tôi chưa??")){
+        }
+        else {
+            return 0;
+        }
+        if (confirm("Bạn có thật sự muốn mua "+ danhsach[i] + " không???" )){
+            alert("Chúc mừng!! bạn đã mua xe thành công!!")
+        }
+        else {
+            alert("Ok fine :((")
+        }
+        displayProducts();
+    }
+</script>
+
+
+</body>
+</html>
