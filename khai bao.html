@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>
+    Click vào sản phẩm để xem thông tin :
+</h3>
+<p id="info" ></p>
+<h3>
+    More products :
+</h3>
+<input id="add" type="text" size="50">
+<button onclick="add()">Add</button>
+<br>
+<h2>
+    novel :
+</h2>
+
+    <table id ="productList">
+
+</table>
+
+<script>
+
+    let danhsach = ['mãi mãi là bao xa\n','hoá ra anh vẫn ở đây\n','bến xe\n','đạo tình\n'];
+    function displayProducts(){
+        let table = "<table border='1' cellspacing='0' cellpadding='10'>";
+        for ( let i  = 0  ; i < danhsach.length ; i ++){
+            table += '<td>'+ [i+1] + " " + '</td>'  ;
+            table += '<td onclick="showInfo('+i+ ')">'+ danhsach[i] ;
+            table +=  '<td>' + '<button onclick="edit('+i+')"> Edit </button></td>';
+            table +=  '<td>' + '<button onclick="del('+i+')"> Delete </button></td>';
+            table +=  '<td>' + '<button onclick="buy('+i+')">Buy</button></td>';
+            table += '</tr>';
+        }
+        table += '</table>';
+        document.getElementById("productList").innerHTML = table;
+    }
+    displayProducts();
+    }
+    function add() {
+        let b = document.getElementById("add").value;
+        if (b.length== 0){
+            alert("bạn chưa nhập")
+        }
+        else {
+            danhsach.push(b);
+            displayProducts();
+        }
+    }
+    function del(k) {
+        danhsach.splice(k,1);
+        displayProducts();
+    }
+    function edit(i) {
+        let newName = prompt("Nhập tên mới");
+        danhsach[i] = newName;
+        displayProducts();
+    }
+    function buy(i) {
+        if (confirm("Bạn đã xem kĩ thông tin sản phẩm chưa?")){
+        }
+        else {
+            return 0;
+        }
+        if (confirm("Bạn có thật sự muốn mua "+ danhsach[i] + " không?" )){
+            alert("Chúc mừng!! bạn đã mua sản phẩm thành công!!")
+        }
+        else {
+            alert("Ok fine :((")
+        }
+        displayProducts();
+    }
+
+</script>
+</body>
+</html>
